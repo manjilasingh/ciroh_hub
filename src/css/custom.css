@@ -1,0 +1,320 @@
+/**
+ * Any CSS included here will be global.The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+ /*
+ :root {
+  --ifm-color-primary: #9e1b32;
+  --ifm-color-primary-dark: #8e182d;
+  --ifm-color-primary-darker: #86172a;
+  --ifm-color-primary-darkest: #6f1323;
+  --ifm-color-primary-light: #ae1e37;
+  --ifm-color-primary-lighter: #b61f39;
+  --ifm-color-primary-lightest: #cd2341;
+}
+ You can override the default Infima variables here. */
+ :root {
+  --ifm-color-primary: #19a7ce;
+
+  --ifm-color-primary-dark: #1796b9;
+
+  --ifm-color-primary-darker: #158eaf;
+
+  --ifm-color-primary-darkest: #117590;
+
+  --ifm-color-primary-light: #1cb8e3;
+
+  --ifm-color-primary-lighter: #25bbe5;
+
+  --ifm-color-primary-lightest: #44c5e8;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-background-color: #eeeeee !important;
+} 
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #19a7ce;
+
+  --ifm-color-primary-dark: #1796b9;
+
+  --ifm-color-primary-darker: #158eaf;
+
+  --ifm-color-primary-darkest: #117590;
+
+  --ifm-color-primary-light: #1cb8e3;
+
+  --ifm-color-primary-lighter: #25bbe5;
+
+  --ifm-color-primary-lightest: #44c5e8;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-background-color: #313131 !important;
+
+}
+/* Styling one class specially in dark mode */
+[data-theme='dark'] .hero__title, .hero__subtitle{
+  color: whitesmoke;
+}
+
+/*
+  This class can be apply to img tag if you want image colors to invert, to look better in a dark mode
+  e.g. <img src="path/to/image.png" class="theme-invert-dark" />
+*/
+[data-theme='dark'] .theme-invert-dark {
+  filter: invert(100%);
+}
+
+[data-theme="light"] .darkImage {
+    display: none; /* Hide dark image in light mode */
+  }
+  
+  [data-theme="light"] .lightImage {
+  display: block; /* Show light image in light mode */
+  }
+  
+  [data-theme="dark"] .lightImage {
+  display: none; /* Hide light image in dark mode */
+  }
+  
+  [data-theme="dark"] .darkImage {
+  display: block; /* Show dark image in dark mode */
+  }
+/* 
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+} */
+ 
+.hidden {
+display: none !important;
+}
+
+.docs-wrapper .container {
+  max-width: 100%;
+  margin-left: 1.3rem;
+  margin-right: 1.3rem;
+}
+
+.embed-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.centered-caption {
+  width: 100%;
+  text-align:center;
+}
+
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .player-wrapper {
+    padding-top: 75%; /* 4:3 Aspect Ratio for smaller screens */
+  }
+}
+
+@media (max-width: 1400px) {
+  :root {
+    /* Adjust the base font size to 90% of the original */
+    font-size: 85% !important;
+    
+    /* Adjust other root variables */
+    --ifm-font-size-base: 90% !important;
+    --ifm-code-font-size: 90% !important;
+    
+    /* Adjust sidebar widths */
+    --doc-sidebar-width: 240px !important; /* 240px * 0.9 */
+  }
+  body {
+    line-height: 1.5;
+  }
+  
+}
+
+.footer {
+  padding-bottom: 2rem;
+}
+
+/* Center the footer columns container */
+.footer__links {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  max-width: 1000px; /* Add max-width to match content width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Column styling */
+.footer__col {
+  flex: 1 1 0; /* Change to flex: 1 to distribute space evenly */
+  min-width: 200px;
+  max-width: 250px; /* Slightly reduce max-width */
+}
+
+/* Rest of the styles remain the same */
+.footer__title {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.footer__item {
+  text-align: left;
+}
+
+.footer-social-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  margin-top: 0.5rem;
+}
+
+.footer__attrib {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1.2rem;
+  color: white;
+  line-height: 1.5;
+}
+
+.footer__funding {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  color: var(--ifm-footer-color);
+  line-height: 1.5;
+}
+
+.footer__bottom {
+  text-align: center;
+  padding-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--ifm-footer-color);
+  opacity: 0.8;
+}
+
+@media (max-width: 996px) {
+  .footer__links {
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center; /* Change to center */
+    margin-bottom: 1.5rem;
+  }
+
+  .footer__col {
+    flex: 0 1 auto; /* Reset flex in mobile view */
+    min-width: 150px;
+    margin-bottom: 1rem;
+  }
+
+  .footer__funding {
+    padding: 1.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .community-impact-wrapper .container {
+    max-width: 100% !important;
+  }
+}
+
+.community-impact-wrapper  .col {
+  padding:0rem;
+}
+
+.community-impact-wrapper  .margin-vert--lg {
+  margin-bottom: 2rem !important;
+  margin-top: 0rem !important;
+}
+
+.responsive-float-figure {
+  float: right;
+  clear: right;
+  max-width: 40%;
+  max-height: 100%;
+}
+
+@media (max-width: 800px) {
+  .responsive-float-figure {
+    float: none;
+    clear: none;
+    max-width: 50%;
+    max-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+[data-theme="light"] .indent-wrapper {
+  background-color: #DEDEDE;
+  border-left-style: solid;
+  border-color: #999999;
+  padding-top: 1rem;
+  padding-left: 2rem;
+  padding-bottom: 0.5rem;
+  padding-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .indent-wrapper {
+  background-color: #343434;
+  border-left-style: solid;
+  border-color: #999999;
+  padding-top: 1rem;
+  padding-left: 2rem;
+  padding-bottom: 0.5rem;
+  padding-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .checkmark-color {
+  color: var(--ifm-color-success-light);
+  font-weight: bold;
+}
+
+[data-theme="light"] .checkmark-color {
+  color: var(--ifm-color-success-dark);
+  font-weight: bold;
+}
+
+[data-theme="light"] .darkImage {
+  display: none; /* Hide dark image in light mode */
+}
+
+[data-theme="light"] .lightImage {
+display: block; /* Show light image in light mode */
+}
+
+[data-theme="dark"] .lightImage {
+display: none; /* Hide light image in dark mode */
+}
+
+[data-theme="dark"] .darkImage {
+display: block; /* Show dark image in dark mode */
+}
