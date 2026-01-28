@@ -491,10 +491,6 @@ const config = {
               }
             ]
           },
-         {
-            type: 'custom-githubAuth',
-            position: 'right',
-          },
         ],
       },
       footer: {
