@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 import { FiTarget, FiSearch, FiUsers } from 'react-icons/fi';
 
 import styles from './styles.module.css';
-import { workingGroups } from './workingGroupsData';
+import { workingGroups } from '@site/src/data/workingGroupsData';
 
 const normalize = (s) => (s ?? '').toLowerCase().trim();
 

@@ -20,9 +20,7 @@ const config = {
       process.env.REACT_APP_API_BASE_URL ||
       process.env.VITE_API_BASE_URL ||
       'https://67h5z9ih7j.execute-api.us-east-1.amazonaws.com/default',
-    onBrokenMarkdownLinks: "warn",
-    onBrokenMarkdownImages: "warn",
-    githubProjectToken: process.env.GITHUB_PROJECT_TOKEN,    
+    githubProjectToken: process.env.GITHUB_PROJECT_TOKEN,
   },
 
   // GitHub pages deployment config.
@@ -38,6 +36,9 @@ const config = {
 
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
   },
 
   // Even if you don't use internalization, you can use this field to set useful
@@ -116,11 +117,8 @@ const config = {
       '@docusaurus/plugin-client-redirects',
       {
         redirects: [
-          // Resources page redirect
-          {
-            to: '/community_products',
-            from: '/resources',
-          },
+          // NOTE: Don't add a redirect for `/resources` here because we have
+          // an actual page at `src/pages/resources/index.js` that already redirects.
           // Feedback page: grandfather in old Science Meeting survey links
           {
             to: '/feedback',
@@ -495,6 +493,10 @@ const config = {
             ]
           },
          {
+            type: 'custom-githubAuth',
+            position: 'right',
+          },
+          {
             type: 'custom-githubAuth',
             position: 'right',
           },

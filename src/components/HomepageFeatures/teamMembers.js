@@ -6,7 +6,7 @@ import { useColorMode } from "@docusaurus/theme-common";
 const team = [
   {
     name: "Arpita Patel",
-    role: "DevOps Manager and Enterprise Architect",
+    role: "Assistant Director of DevOps and IT",
     image: "/img/teamMember1.png",
     linkedin: "https://www.linkedin.com/in/example-arpita"
   },
