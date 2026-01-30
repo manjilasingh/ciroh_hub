@@ -4,7 +4,7 @@ import { LiaExternalLinkSquareAltSolid } from 'react-icons/lia';
 import { FaGraduationCap } from 'react-icons/fa';
 import { IoTvOutline } from 'react-icons/io5';
 import { LuLayers3 } from 'react-icons/lu';
-import { HiOutlineGlobeAlt } from 'react-icons/hi';
+import { HiOutlineGlobeAlt, HiOutlineUserGroup } from 'react-icons/hi';
 import { useColorMode } from '@docusaurus/theme-common';
 
 function isPlaceholder(resource) {
@@ -59,9 +59,9 @@ function ResourceCard({ resource, defaultImage }) {
     return (
         <article
             id={resource?.resource_id}
-            className="tw-group tw-overflow-hidden tw-rounded-xl tw-border-2 tw-border-slate-400 dark:tw-border-slate-500 tw-bg-slate-100 dark:tw-bg-slate-900 tw-shadow-md hover:tw-shadow-xl hover:tw-border-cyan-500 tw-transition"
+            className="tw-group tw-flex tw-h-full tw-flex-col tw-overflow-hidden tw-rounded-xl tw-border-2 tw-border-slate-400 dark:tw-border-slate-500 tw-bg-slate-100 dark:tw-bg-slate-900 tw-shadow-md hover:tw-shadow-xl hover:tw-border-cyan-500 tw-transition"
         >
-            <div className="tw-flex tw-flex-col sm:tw-flex-row tw-gap-5 tw-p-5">
+            <div className="tw-flex tw-flex-1 tw-flex-col sm:tw-flex-row tw-gap-5 tw-p-5">
                 <div className="tw-relative tw-shrink-0 tw-w-full sm:tw-w-[150px] tw-h-[130px] tw-rounded-lg tw-overflow-hidden tw-bg-slate-100 dark:tw-bg-slate-800">
                     {placeholder ? (
                         <div className="tw-h-full tw-w-full tw-animate-pulse tw-bg-slate-200 dark:tw-bg-slate-800" />
@@ -79,7 +79,7 @@ function ResourceCard({ resource, defaultImage }) {
                     )}
                 </div>
 
-                <div className="tw-min-w-0 tw-flex-1">
+                <div className="tw-min-w-0 tw-flex tw-flex-1 tw-flex-col">
                     {placeholder ? (
                         <div className="tw-space-y-3">
                             <div className="tw-h-5 tw-w-2/3 tw-animate-pulse tw-rounded tw-bg-slate-200 dark:tw-bg-slate-800" />
@@ -105,13 +105,18 @@ function ResourceCard({ resource, defaultImage }) {
                             </h3>
 
                             {authors.length > 0 && (
-                                <div className="tw-mt-2 tw-text-xs tw-text-slate-600 dark:tw-text-slate-300 tw-line-clamp-1">
-                                    {authors.join(' • ')}
+                                <div className="tw-mt-2 tw-flex tw-items-start tw-gap-2 tw-text-xs tw-text-slate-600 dark:tw-text-slate-300 tw-whitespace-normal tw-break-words">
+                                    <span className="tw-mt-[1px] tw-shrink-0 tw-text-slate-500 dark:tw-text-slate-400" aria-hidden="true">
+                                        <HiOutlineUserGroup size={16} />
+                                    </span>
+                                    <span>
+                                        {authors.join(' • ')}
+                                    </span>
                                 </div>
                             )}
 
                             {description && (
-                                <p className="tw-mt-3 tw-text-sm tw-leading-relaxed tw-text-slate-600 dark:tw-text-slate-300 tw-line-clamp-3">
+                                <p className="tw-mt-3 tw-flex-1 tw-text-sm tw-leading-relaxed tw-text-slate-600 dark:tw-text-slate-300 tw-line-clamp-6">
                                     {description}
                                 </p>
                             )}
@@ -120,7 +125,7 @@ function ResourceCard({ resource, defaultImage }) {
                 </div>
             </div>
 
-            <div className="tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-gap-3 tw-border-t tw-border-slate-200/70 dark:tw-border-slate-700/70 tw-bg-blue-800 dark:tw-bg-slate-800 tw-px-5 tw-py-3">
+            <div className="tw-mt-auto tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-gap-3 tw-border-t tw-border-slate-200/70 dark:tw-border-slate-700/70 tw-bg-blue-800 dark:tw-bg-slate-800 tw-px-5 tw-py-3">
                 <div className="tw-flex tw-flex-wrap tw-gap-2">
                     {resourceType && !placeholder && <StatTag>{resourceType}</StatTag>}
                     {!resourceType && !placeholder && <StatTag>Resource</StatTag>}

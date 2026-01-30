@@ -214,22 +214,16 @@ export default function HydroShareResourcesSelector({
   }, [currentPage, hasMore, fetchResources]);
 
   /* search helpers */
-  const commitSearch = q => {
+  const commitSearch = (q) => {
     clearTimeout(debounceTimer);
-    setFilterSearch(q.trim());
+    setFilterSearch(String(q || '').trim());
   };
-  const handleKeyUp   = () => {
+
+  useEffect(() => {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => commitSearch(searchInput), DEBOUNCE_MS);
-  };
-  const handleKeyPress = () => clearTimeout(debounceTimer);
-  const handleKeyDown  = e => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      commitSearch(searchInput);
-    }
-  };
-  const handleBlur = () => commitSearch(searchInput);
+    return () => clearTimeout(debounceTimer);
+  }, [searchInput]);
 
   const resultLabel = keyword == 'nwm_portal_app'
     ? 'Apps'
@@ -265,10 +259,13 @@ export default function HydroShareResourcesSelector({
                   className="tw-w-full tw-rounded-lg tw-border tw-border-slate-200/80 dark:tw-border-slate-700/80 tw-bg-white/80 dark:tw-bg-slate-900/50 tw-backdrop-blur tw-pl-10 tw-pr-3 tw-py-3 tw-text-sm tw-text-slate-900 dark:tw-text-white placeholder:tw-text-slate-400 dark:placeholder:tw-text-slate-500 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-cyan-500/30"
                   value={searchInput}
                   onChange={e => setSearchInput(e.target.value)}
-                  onKeyUp={handleKeyUp}
-                  onKeyPress={handleKeyPress}
-                  onKeyDown={handleKeyDown}
-                  onBlur={handleBlur}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      commitSearch(e.currentTarget.value);
+                    }
+                  }}
+                  onBlur={(e) => commitSearch(e.currentTarget.value)}
                 />
               </div>
 
