@@ -243,11 +243,13 @@ export default function HydroShareResourcesSelector({
     return () => clearTimeout(debounceTimer);
   }, [searchInput]);
 
-  const resultLabel = keyword === 'nwm_portal_app'
-    ? 'Apps'
-    : keyword === 'nwm_portal_module'
-      ? 'Courses'
-      : 'Resources';
+  let resultLabel = 'Resources';
+
+  if (keyword.includes('app')) resultLabel = 'Apps';
+  else if (keyword.includes('module')) resultLabel = 'Courses';
+  else if (keyword.includes('data')) resultLabel = 'Datasets';
+  else if (keyword.includes('presentation')) resultLabel = 'Presentations';
+
 
   /* ---------------- render ---------------- */
   if (variant === 'modern') {
