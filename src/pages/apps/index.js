@@ -190,7 +190,7 @@ function AppsPageContent({ contributeUrl, docsUrl, defaultImage }) {
 
       <main className="tw-relative tw-z-20">
         <HydroShareResourcesSelector
-          keyword="nwm_portal_app"
+          keyword="nwm_portal_app,ciroh_hub_app"
           defaultImage={defaultImage}
           variant="modern"
           onResultsChange={onResultsChange}

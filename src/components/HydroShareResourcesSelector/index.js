@@ -21,7 +21,7 @@ let   debounceTimer    = null;
 const DEBOUNCE_MS      = 1_000;
 
 export default function HydroShareResourcesSelector({
-  keyword = "nwm_portal_app",
+  keyword = "nwm_portal_app,ciroh_hub_app",
   defaultImage,
   variant = 'legacy',
   onResultsChange,
@@ -243,11 +243,13 @@ export default function HydroShareResourcesSelector({
     return () => clearTimeout(debounceTimer);
   }, [searchInput]);
 
-  const resultLabel = keyword === 'nwm_portal_app'
-    ? 'Apps'
-    : keyword === 'nwm_portal_module'
-      ? 'Courses'
-      : 'Resources';
+  let resultLabel = 'Resources';
+
+  if (keyword.includes('app')) resultLabel = 'Apps';
+  else if (keyword.includes('module')) resultLabel = 'Courses';
+  else if (keyword.includes('data')) resultLabel = 'Datasets';
+  else if (keyword.includes('presentation')) resultLabel = 'Presentations';
+
 
   /* ---------------- render ---------------- */
   if (variant === 'modern') {
@@ -256,11 +258,15 @@ export default function HydroShareResourcesSelector({
         <div className="tw-mx-auto tw-max-w-7xl tw-px-4 sm:tw-px-6 lg:tw-px-8">
           <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-items-center lg:tw-justify-between tw-gap-4 tw-mb-6">
             <div className="tw-text-sm sm:tw-text-base tw-text-slate-600 dark:tw-text-slate-300">
-              Showing{' '}
-              <strong className="tw-font-semibold tw-text-slate-900 dark:tw-text-white">
-                {nonPlaceholderResources.length}
-              </strong>{' '}
-              {resultLabel}
+              {loading || fetching.current ? "Fetching " + resultLabel + "..." : (
+                <>
+                  Showing{' '}
+                  <strong className="tw-font-semibold tw-text-slate-900 dark:tw-text-white">
+                    {nonPlaceholderResources.length}
+                  </strong>{' '}
+                  {resultLabel}
+                </>
+              )}
             </div>
 
             <form
@@ -362,15 +368,31 @@ export default function HydroShareResourcesSelector({
     );
   }
 
+    /* legacy search helpers */
+  const handleKeyUp   = () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => commitSearch(searchInput), DEBOUNCE_MS);
+  };
+  const handleKeyPress = () => clearTimeout(debounceTimer);
+  const handleKeyDown  = e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      commitSearch(searchInput);
+    }
+  };
+  const handleBlur = () => commitSearch(searchInput);
+
   return (
     <div className={clsx(styles.wrapper)}>
       <div className={clsx("container", "margin-bottom--lg")}>
         {/* counter */}
       <div className={styles.counterRow}>
-        Showing&nbsp;
-        <strong>{nonPlaceholderResources.length}</strong>
-        &nbsp; {resultLabel}
-        {!loading && <> of <strong>{nonPlaceholderResources.length}</strong></>}
+        {loading || fetching.current ? "Fetching " + resultLabel + "..." : (
+        <>
+          Showing&nbsp;<strong>{nonPlaceholderResources.length}</strong>
+          &nbsp;{resultLabel}
+        </>
+        )}
       </div>
 
         {/* Search Form */}

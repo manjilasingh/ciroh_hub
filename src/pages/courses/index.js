@@ -190,7 +190,7 @@ function CoursesPageContent({ contributeUrl, docsUrl }) {
 
       <main className="tw-relative tw-z-20">
         <HydroShareResourcesSelector
-          keyword="nwm_portal_module"
+          keyword="nwm_portal_module,ciroh_hub_module"
           defaultImage={defaultImage}
           variant="modern"
           onResultsChange={onResultsChange}

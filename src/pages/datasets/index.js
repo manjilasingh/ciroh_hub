@@ -181,7 +181,7 @@ function DatasetsPageContent({ contributeUrl, docsUrl }) {
 
       <main className="tw-relative tw-z-20">
         <HydroShareResourcesSelector
-          keyword="ciroh_portal_data"
+          keyword="ciroh_portal_data,ciroh_hub_data"
           defaultImage="https://ciroh-portal-static-data.s3.us-east-1.amazonaws.com/dataset_placeholder.png"
           variant="modern"
           onResultsChange={onResultsChange}

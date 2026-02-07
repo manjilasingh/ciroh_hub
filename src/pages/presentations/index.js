@@ -181,7 +181,7 @@ function PresentationsPageContent({ contributeUrl, docsUrl }) {
 
       <main className="tw-relative tw-z-20">
         <HydroShareResourcesSelector
-          keyword="ciroh_portal_presentation"
+          keyword="ciroh_portal_presentation,ciroh_hub_presentation"
           defaultImage="https://ciroh-portal-static-data.s3.us-east-1.amazonaws.com/presentation_placeholder.png"
           variant="modern"
           onResultsChange={onResultsChange}

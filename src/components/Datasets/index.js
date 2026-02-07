@@ -151,7 +151,7 @@ export default function Datasets({ community_id = 4 }) {
       try {
         const [curatedIds, communityResourcesResponse] = await Promise.all([
           fetchCuratedIds(),                // get array of curated resource IDs
-          getCommunityResources("ciroh_portal_data", "4", fullTextSearch, ascending, sortBy, undefined, page, PAGE_SIZE) // get all resources for the group
+          getCommunityResources("ciroh_portal_data,ciroh_hub_data", "4", fullTextSearch, ascending, sortBy, undefined, page, PAGE_SIZE) // get all resources for the group
         ]);
 
         const resourceList = communityResourcesResponse.resources;
@@ -328,11 +328,13 @@ export default function Datasets({ community_id = 4 }) {
       <div className={clsx("container", "margin-bottom--lg")}>
         {/* Counter */}
         <div className={styles.counterRow}>
-          Showing&nbsp;
-          <strong>{getFilteredResourceCount()}</strong>
-          &nbsp;Datasets
-          {!loading && (
-            <> of <strong>{getTotalResourceCount()}</strong></>
+          {loading || fetching.current ? "Fetching Datasets..." : (
+            <>
+              Showing&nbsp;
+              <strong>{getFilteredResourceCount()}</strong>
+              &nbsp;Datasets
+              of <strong>{getTotalResourceCount()}</strong>
+            </>
           )}
         </div>
 
