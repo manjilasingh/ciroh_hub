@@ -5,13 +5,22 @@ name: ciroh-ua-website-ci
 
 on:
   push:
-    branches: ["main"]
-    tags:
-      - 'production-*'
+    branches:
+     - main
+     - test-deploy
   workflow_call:
     # Map the workflow outputs to job outputs
     # https://docs.github.com/en/github-ae@latest/actions/using-workflows/reusing-workflows
   workflow_dispatch:
+    inputs:
+      deploy_env:
+        description: 'Deployment environment'
+        required: false
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
       
 jobs:
   build:
@@ -47,16 +56,15 @@ jobs:
     # a fresh lock file.
     # See also: https://github.com/npm/cli/issues/4828
 
-    # Determine if this is a production build from tag
+    # Determine if this is a production build (manual trigger only)
     - name: Determine build type and version
       id: build-info
       run: |
-        if [[ "${{ github.ref }}" == refs/tags/production-* ]]; then
-          TAG="${{ github.ref }}"
-          VERSION=${TAG#refs/tags/production-}
+        if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ github.event.inputs.deploy_env }}" == "production" ]]; then
+          VERSION=$(date +'%Y%m%d-%H%M%S')
           echo "DEPLOY_ENV=production" >> $GITHUB_ENV
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "Building for PRODUCTION environment"
+          echo "Building for PRODUCTION environment (manual trigger)"
         else
           VERSION=$(date +'%Y%m%d-%H%M%S')
           echo "DEPLOY_ENV=staging" >> $GITHUB_ENV
@@ -101,6 +109,15 @@ jobs:
     # Build the site
     - name: Build website
       run: npm run build
+      env:
+          ZOTERO_API_KEY: ${{ secrets.ZOTERO_API_KEY }}
+          ZOTERO_CIROH_GROUP_ID: ${{ secrets.ZOTERO_CIROH_GROUP_ID }}
+          CAPTCHA_KEY: ${{ secrets.CAPTCHA_KEY }}
+          S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+          S3_ACCESS_KEY: ${{ secrets.S3_ACCESS_KEY }}
+          S3_SECRET_KEY: ${{ secrets.S3_SECRET_KEY }}
+          S3_REGION: ${{ secrets.S3_REGION }}
+          HS_CLIENT_ID: ${{ secrets.HS_CLIENT_ID }}
         
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4
