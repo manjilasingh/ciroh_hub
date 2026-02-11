@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useColorMode } from '@docusaurus/theme-common';
 import styles from "./styles.module.css";
 
@@ -18,7 +18,7 @@ const DEFAULT_POWERED_BY = [
 export default function TechBox({ items=DEFAULT_POWERED_BY,type }) {
   const { colorMode } = useColorMode();
 
-  const renderPoweredBy = () => {
+  const renderPoweredBy = useCallback(() => {
     if (!items || items.length === 0) return null;
     return items.map((item, index) => {
       const isFirst = index === 0;
@@ -34,7 +34,7 @@ export default function TechBox({ items=DEFAULT_POWERED_BY,type }) {
         </React.Fragment>
       );
     });
-  };
+  }, [items]);
 
   return (
     <div className={styles.wrapper}>
