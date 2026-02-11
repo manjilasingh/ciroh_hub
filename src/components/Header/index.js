@@ -31,7 +31,7 @@ export default function Header({ title, tagline, buttons }) {
 
               <p
                 className={clsx(
-                  'tw-mt-6 tw-max-w-2xl tw-text-center md:tw-text-left sm:tw-text-lg tw-leading-relaxed tw-text-blue-800/80 dark:tw-text-white',
+                  'tw-mt-6 tw-max-w-2xl tw-text-center md:tw-text-left sm:tw-text-lg tw-leading-relaxed',
                   styles.heroSubtitle,
                 )}
               >

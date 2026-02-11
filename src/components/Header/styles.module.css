@@ -27,7 +27,7 @@
 }
 .heroSubtitle {
   margin-bottom: 1rem;
-  color: var(--ifm-color-secondary);
+  color: var(--ifm-footer-color);
 }
 
 /* Responsive adjustments for heroBanner */
