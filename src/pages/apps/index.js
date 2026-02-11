@@ -15,11 +15,15 @@ const items = [
     lightIcon: TethysLogoDark,
     darkIcon: TethysLogWhite,
     alt: 'Tethys Platform',
+    name: 'Tethys Platform',
+    href: 'https://www.tethysplatform.org/',
   },
   {
     lightIcon: HydroShareLogo,
     darkIcon: HydroShareLogo,
     alt: 'HydroShare',
+    name: 'HydroShare',
+    href: 'https://hydroshare.org/',
   },
 ];
 

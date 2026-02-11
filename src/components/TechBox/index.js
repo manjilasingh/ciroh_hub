@@ -15,23 +15,25 @@ const DEFAULT_POWERED_BY = [
   },
 ];
 
-export default function TechBox({ items, type, poweredByItems = DEFAULT_POWERED_BY }) {
+export default function TechBox({ items=DEFAULT_POWERED_BY,type }) {
   const { colorMode } = useColorMode();
 
   const renderPoweredBy = () => {
-    if (!poweredByItems || poweredByItems.length === 0) return null;
-    
-    return poweredByItems.map((item, index) => (
-      <React.Fragment key={item.name}>
-        {index > 0 && index === poweredByItems.length - 1 ? ' and ' : ', '}
-        <a 
-          href={item.href} 
-          className={item.className || styles.link}
-        >
-          {item.name}
-        </a>
-      </React.Fragment>
-    )).slice(1); // Remove leading comma
+    if (!items || items.length === 0) return null;
+    return items.map((item, index) => {
+      const isFirst = index === 0;
+      const isLast = index === items.length - 1;
+      const separator = isFirst ? ' ' : isLast ? ' and ' : ', ';
+
+      return (
+        <React.Fragment key={`${item.name}-${index}`}>
+          {separator}
+          <a href={item.href} className={item.className || styles.link}>
+            {item.name}
+          </a>
+        </React.Fragment>
+      );
+    });
   };
 
   return (

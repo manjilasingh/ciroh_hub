@@ -14,6 +14,8 @@ const items = [
     lightIcon: ZoteroLightLogo,
     darkIcon: ZoteroDarkLogo,
     alt: 'Zotero',
+    name: 'Zotero',
+    href: 'https://www.zotero.org/',
   },
 ];
 

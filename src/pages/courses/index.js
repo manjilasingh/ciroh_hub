@@ -16,11 +16,15 @@ const items = [
     lightIcon: HydroLearnLogo,
     darkIcon: HydroLearnLogo,
     alt: 'HydroLearn',
+    name: 'HydroLearn',
+    href: 'https://www.hydrolearn.org/',
   },
   {
     lightIcon: HydroShareLogo,
     darkIcon: HydroShareLogo,
     alt: 'HydroShare',
+    name: 'HydroShare',
+    href: 'https://www.hydroshare.org/',
   },
 ];
 

@@ -13,6 +13,8 @@ const items = [
     lightIcon: HydroShareLogo,
     darkIcon: HydroShareLogo,
     alt: 'HydroShare',
+    name: 'HydroShare',
+    href: 'https://hydroshare.org/',
   },
 ];
 
