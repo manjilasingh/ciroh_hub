@@ -1,46 +1,14 @@
-import React from "react";
-import "./teamMembers.css";
+import "./TeamGallery.css";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
-const investigators = [
-  {
-    name: "Purushotham Bangalore",
-    role: "Community Accessible Development: Nextgen Water Resources Modeling Framework in the CIROH Research to Operations Hybrid Cloud",
-    image: "/img/profiles/Purushotham_Bangalore.jpg",
-    initial: "PB",
-    link: "https://eng.ua.edu/eng-directory/dr-purushotham-bangalore/",
-    orgName: "The University of Alabama",
-    orgLogo: "/img/logos/uni/UAlogo.png",
-  },
-  {
-    name: "Arpita Patel",
-    role: "Advancing Community NextGen and NextGen In A Box (NGIAB) - Paving the Pathway to Operations",
-    image: "/img/profiles/Arpita_Patel.png",
-    initial: "AP",
-    link: "https://awi.ua.edu/directory/arpita-patel/",
-    orgName: "The University of Alabama",
-    orgLogo: "/img/logos/uni/UAlogo.png",
-  },
-  {
-    name: "Dan Ames",
-    role: "Turning Research into Actionable Information for Operational Impact by Advancing NOAA's National Cyberinfrastructure, CIROH Portal, and Web and Mobile Apps",
-    image: "/img/profiles/Dan_Ames.jpg",
-    initial: "DA",
-    link: "https://cce.byu.edu/directory/dan-ames",
-    orgName: "Brigham Young University",
-    orgLogo: "/img/logos/uni/byu.png",
-  },
-
-];
-
-export default function PrincipalInvestigators() {
+export default function TeamGalleryGenerator({team, text}) {
   return (
     <section className="team-section">
-      <h2 className="team-title tw-mt-8">Leads</h2>
+      <h2 className="team-title tw-mt-8">{text}</h2>
       <div className="team-divider"></div>
 
       <div className="team-grid-list">
-        {investigators.map((person) => (
+        {team.map((person) => (
           <div
             className="tw-bg-slate-100 tw-text-black dark:tw-bg-slate-900 dark:tw-text-blue-800 profile-card"
             key={person.name}

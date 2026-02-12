@@ -1,0 +1,103 @@
+export default [
+    {
+        name: "Baron Weather",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/Baron-Logo_BlackVertical_2022-269x300.png",
+        link: "https://baronweather.com/",
+        width: "80",
+        height: "105",
+    },
+    {
+        name: "Oak Ridge National Laboratory",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/ORNL-Two-line_green-300x72.png",
+        link: "https://www.ornl.gov/",
+        width: "190",
+        height: "50",
+    },
+
+    {
+        name: "Dauphin Island Sea Lab",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/DISL-centered-logo-Tag-300x183.png",
+        link: "https://www.disl.edu/",
+        width: "200",
+        height: "120",
+    },
+    {
+        name: "Jupiter Intelligence",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/Jupiter_Logo_Color-300x86.png",
+        link: "https://www.jupiterintel.com/",
+        width: "190",
+        height: "50",
+    },
+
+    {
+        name: "RTI International",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/RTI_logo_rgb_1in-300x188.png",
+        link: "https://www.rti.org/centers/rti-center-water-resources",
+        width: "190",
+        height: "100",
+    },
+    {
+        name: "CUAHSI",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/new-logo-with-black-text-300x79.png",
+        link: "https://www.cuahsi.org/",
+        width: "190",
+        height: "60",
+    },
+    {
+        name: "Stevens Institute Of Technology",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/Stevens-Primary-logo_4C-RGB-262x300.png",
+        link: "https://www.stevens.edu/",
+        width: "126",
+        height: "140",
+    },
+    {
+        name: "Gulf Of Mexico Costal Ocean Observing System",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/GCOOS-logo-01-landscape-colors-300x188.png",
+        link: "https://gcoos.org/",
+        width: "150",
+        height: "100",
+    },
+    {
+        name: "New Mexico State University",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/NMSU_NoU-Crimson-266x300.png",
+        link: "https://nmsu.edu/",
+        width: "80",
+        height: "100",
+    },
+    {
+        name: "Penn State University",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/PS_HOR_PMS_287_284-300x99.png",
+        link: "https://www.psu.edu/",
+        width: "190",
+        height: "70",
+    },
+
+    {
+        name: "University of Southern California",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/usc_logo_centered_RGB_G-300x147.png",
+        link: "https://sc.edu/",
+        width: "170",
+        height: "80",
+    },
+    {
+        name: "UC Davis",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/ucdavis_logo_blue-300x52.png",
+        link: "https://www.ucdavis.edu/",
+        width: "190",
+        height: "35",
+    },
+    {
+        name: "Coastal Carolina University",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/ccu_stck_cmyk_2clr-300x257.png",
+        link: "https://www.coastal.edu/index.php",
+        width: "100",
+        height: "90",
+    },
+    {
+        name: "University of Illinois Urbana-Champaign",
+        logo: "https://ciroh.ua.edu/wp-content/uploads/2023/03/University-Wordmark-Full-Color-RGB-300x78.png",
+        link: "https://illinois.edu/",
+        width: "180",
+        height: "50",
+    },
+];
