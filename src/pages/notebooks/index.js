@@ -1,11 +1,12 @@
 import React, { useCallback, useMemo, useState } from "react";
+import Header from "@site/src/components/Header";
+import HydroShareResourcesSelector from "@site/src/components/HydroShareResourcesSelector";
 import { ConstellationCanvas } from '@site/src/components/ConstellationCanvas';
 import Layout from '@theme/Layout';
 import TechBox from "@site/src/components/TechBox";
-import HydroShareResourcesSelector from "@site/src/components/HydroShareResourcesSelector";
 import HydroShareLogo from '@site/static/img/logos/hydroshare-white.png';
+import JupyterLogo from '@site/static/img/logos/jupyter-logo.svg';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import Header from "@site/src/components/Header";
 import { useColorMode } from '@docusaurus/theme-common';
 import StatsBar from "@site/src/components/StatsBar";
 import { getResourceStats } from "@site/src/utils/resourceStats";
@@ -20,33 +21,35 @@ const items = [
   },
 ];
 
-export default function PresentationsPage() {
-  const contributeUrl = useBaseUrl('/contribute?current-contribution=presentations');
+export default function NoteBooksPage() {
+  const contributeUrl = useBaseUrl('/contribute?current-contribution=notebooks');
   const docsUrl = useBaseUrl('/docs/products/intro');
+  const defaultImage = JupyterLogo; 
 
   return (
-    <Layout title="Presentations" description="CIROH Presentations">
-      <PresentationsPageContent
+    <Layout title="Notebooks" description="CIROH NoteBooks">
+      <NoteBooksPageContent
         contributeUrl={contributeUrl}
         docsUrl={docsUrl}
+        defaultImage={defaultImage}
       />
     </Layout>
   );
 }
 
-function PresentationsPageContent({ contributeUrl, docsUrl }) {
+function NoteBooksPageContent({ contributeUrl, docsUrl, defaultImage }) {
   const { colorMode } = useColorMode();
   const isDarkTheme = colorMode === 'dark';
 
-  const [presentations, setPresentations] = useState([]);
+  const [notebooks, setNotebooks] = useState([]);
   const [statsLoading, setStatsLoading] = useState(true);
 
   const onResultsChange = useCallback((results, meta) => {
-    setPresentations(results);
+    setNotebooks(results);
     setStatsLoading(Boolean(meta?.loading));
   }, []);
 
-  const stats = useMemo(() => getResourceStats(presentations), [presentations]);
+  const stats = useMemo(() => getResourceStats(notebooks), [notebooks]);
 
   return (
     <>
@@ -55,24 +58,23 @@ function PresentationsPageContent({ contributeUrl, docsUrl }) {
         <div className="tw-absolute tw-inset-0 tw-pointer-events-none tw-overflow-hidden" style={{ zIndex: 0 }}>
           <ConstellationCanvas isDarkTheme={isDarkTheme} />
         </div>
-      <div className="margin-top--lg">
-        <Header 
-            title="Presentations" 
-            tagline="Presentations and workshops regarding CIROH and NOAA&apos;s hydrologic research, offering cutting-edge insights into the latest tools and advances in hydrology."
-            buttons={[
-                { label: "Add your Presentation", href: contributeUrl, primary: true },
-                { label: "Browse Documentation", href: docsUrl }
-              ]}
-        />
-      </div>
-
+        <div className="margin-top--lg">
+            <Header 
+                title="Notebooks" 
+                tagline="Python notebooks and other code combined with data resources and readme files to execute modeling workflows."
+                buttons={[
+                    { label: "Add your Notebooks", href: contributeUrl, primary: true },
+                    { label: "Browse Documentation", href: docsUrl }
+                ]}
+            />
+        </div>
       </section>
 
       {/* Stats */}
       <StatsBar
         loading={statsLoading}
         items={[
-          { label: 'Total Presentations', value: stats.total },
+          { label: 'Total Notebooks', value: stats.total },
           { label: 'Categories', value: stats.categories },
           { label: 'Contributors', value: stats.contributors },
           { label: 'Latest Update', value: stats.lastUpdated },
@@ -81,14 +83,14 @@ function PresentationsPageContent({ contributeUrl, docsUrl }) {
 
       <main className="tw-relative tw-z-20">
         <HydroShareResourcesSelector
-          keyword="ciroh_portal_presentation,ciroh_hub_presentation"
-          defaultImage="https://ciroh-portal-static-data.s3.us-east-1.amazonaws.com/presentation_placeholder.png"
+          keyword="ciroh_hub_notebook"
+          defaultImage={defaultImage}
           variant="modern"
           onResultsChange={onResultsChange}
         />
 
         <div className="tw-pb-16">
-          <TechBox items={items} type={"Presentations"} />
+          <TechBox items={items} type={"NoteBooks"} tethys />
         </div>
       </main>
     </>

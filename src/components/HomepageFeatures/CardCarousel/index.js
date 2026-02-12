@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import './CardCarousel.css';
 
-const CardCarousel = ({ cards }) => {
+const CardCarousel = ({ cards, header }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [cardsPerView, setCardsPerView] = useState(3);
     const autoScrollRef = useRef(null);
@@ -87,14 +87,7 @@ const CardCarousel = ({ cards }) => {
     return (
         <div className="tw-w-full tw-relative tw-py-12">
             {/* Header */}
-            <div className="tw-text-center tw-mb-12">
-                <h2 className="tw-text-4xl md:tw-text-5xl tw-font-extrabold tw-text-blue-800 dark:tw-text-white tw-mb-4">
-                    Explore CIROH
-                </h2>
-                <p className="tw-text-lg tw-text-slate-900 dark:tw-text-slate-300">
-                    Discover our comprehensive suite of tools and services
-                </p>
-            </div>
+            { header }
 
             {/* Carousel Container */}
             <div className="tw-relative tw-max-w-7xl tw-mx-auto tw-px-4">

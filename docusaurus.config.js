@@ -8,7 +8,7 @@ const baseUrl = "/local/";
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "CIROH Hub",
-  tagline: "Documenting Water Research in the Digital Age",
+  tagline: "Hydrologic Science Research Data and Products",
   staticDirectories: ["static", "img"],
   url: "http://ciroh.org",
   baseUrl: baseUrl,
@@ -222,7 +222,7 @@ const config = {
           title: "CIROH Hub",
           logo: {
             alt: "CIROH Logo",
-            src: "img/logos/docuhub.png",
+            src: "img/logos/ciroh-bgsafe.png",
           },
           items: [
             {
@@ -248,6 +248,10 @@ const config = {
                 {
                   href: "/publications",
                   label: "Publications",
+                },
+                {
+                  href: "/notebooks",
+                  label: "Notebooks",
                 },
               ],
             },
@@ -325,10 +329,10 @@ const config = {
                   label: 'Contribute',
                   href: '/contribute'
                 },
-                {
+                /*{
                   label: 'Feedback',
                   href: 'https://forms.office.com/r/5ww7qRWwwf'
-                },
+                },*/
                 {
                   label: 'Release Notes',
                   href: '/release-notes'
@@ -352,7 +356,7 @@ const config = {
                 },
                 {
                   label: 'CIROH Hub Repository',
-                  href: 'https://github.com/CIROH-UA/ciroh-ua_website'
+                  href: 'https://github.com/CIROH-UA/ciroh_hub'
                 },
               ]
             },

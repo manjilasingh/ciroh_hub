@@ -1,6 +1,7 @@
 import React from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
+import clsx from 'clsx';
 import {
   HiOutlineClipboardList,
   HiOutlineLink,
@@ -20,7 +21,7 @@ export default function HydroShareCard() {
           <h2 className={styles.title}>Contribute to HydroShare Resources</h2>
         </div>
         <p className={styles.subtitle}>
-          Publish your apps, datasets, courses, and presentations on HydroShare
+          Publish your apps, datasets, notebooks, courses, and presentations on HydroShare
         </p>
       </div>
 
@@ -39,21 +40,37 @@ export default function HydroShareCard() {
           <div className={styles.icon}><HiOutlineTag size={28} /></div>
           <h4>Use Tags</h4>
           <p>Choose the tag that matches your resource type.</p>
-          <div className={styles.tags}>
+          <div className={clsx(styles.tags, "margin-bottom--sm")}>
             <span className={`${styles.tag} ${styles.tagApp}`} title="Products/Apps">ciroh_hub_app</span>
             <span className={`${styles.tag} ${styles.tagModule}`} title="Courses/Modules">ciroh_hub_module</span>
             <span className={`${styles.tag} ${styles.tagPresentation}`} title="Presentations">ciroh_hub_presentation</span>
             <span className={`${styles.tag} ${styles.tagData}`} title="Datasets">ciroh_hub_data</span>
+            <span className={`${styles.tag} ${styles.tagNotebook}`} title="Notebooks">ciroh_hub_notebook</span>
           </div>
+          <details>
+              <summary>About deprecated tags...</summary>
+              <p>The following tags are deprecated. Their content will still appear on CIROH Hub, but using them for new resources is discouraged.</p>
+              <div className={styles.tags}>
+                <span className={`${styles.tag} ${styles.tagDeprecated}`} title="Products/Apps (Deprecated)">nwm_portal_app</span>
+                <span className={`${styles.tag} ${styles.tagDeprecated}`} title="Courses/Modules (Deprecated)">nwm_portal_module</span>
+                <span className={`${styles.tag} ${styles.tagDeprecated}`} title="Presentations (Deprecated)">ciroh_portal_presentation</span>
+                <span className={`${styles.tag} ${styles.tagDeprecated}`} title="Datasets (Deprecated)">ciroh_portal_data</span>
+              </div>
+            </details>
         </div>
         <div className={styles.card}>
           <div className={styles.icon}><HiOutlineLink size={28} /></div>
           <h4>Optional metadata</h4>
           <p>Enhance your card with metadata.</p>
           <div className={styles.codeRow}>
-            <code className={styles.code}>page_url</code>
-            <code className={styles.code}>docs_url</code>
-            <code className={styles.code}>thumbnail_url</code>
+            <div><code className={styles.code}>page_url</code></div>
+            <p>A URL for your resource's website.</p>
+            <div><code className={styles.code}>docs_url</code></div>
+            <p>A URL for your resource's documentation.</p>
+            <div><code className={styles.code}>thumbnail_url</code></div>
+            <p>A URL for a thumbnail image.</p>
+            <div><code className={styles.code}>pres_path</code></div>
+            <p>File path to a PDF within your resource.</p>
           </div>
         </div>
       </div>
