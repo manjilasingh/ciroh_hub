@@ -1,5 +1,6 @@
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import { fetchResourcesBySearch } from "@site/src/api/hydroshareAPI";
+import { getCommunityResources } from "@site/src/components/HydroShareImporter";
 import React, { useState, useRef, useEffect } from 'react';
 
 export default function ResearchFeature() {
@@ -9,6 +10,7 @@ export default function ResearchFeature() {
         datasets: 0,
         presentations: 0,
         courses: 0,
+        notebooks: 0,
     });
     const [statsLoading, setStatsLoading] = useState(true);
     const [statsError, setStatsError] = useState(null);
@@ -58,27 +60,85 @@ export default function ResearchFeature() {
         return total;
     }
 
+    // Count community resources (matches datasets page behavior)
+    async function countCommunityResources(keyword, communityId = "4") {
+        let page = 1;
+        let totalPagesChecked = 0;
+        const resourceIds = new Set();
+        try {
+            console.log(`[countCommunityResources] Starting count for: ${keyword}`);
+            while (true) {
+                const response = await getCommunityResources(
+                  keyword,
+                  communityId,
+                  undefined,  // fullTextSearch
+                  false,      // ascending
+                  "modified", // sortBy
+                  undefined,  // author
+                  page,
+                  40          // pageSize
+                );
+
+                const items = response?.resources || [];
+                totalPagesChecked++;
+
+                items.forEach((item) => {
+                    if (item?.resource_id) {
+                        resourceIds.add(item.resource_id);
+                    }
+                });
+
+                const hasMorePages = Boolean(
+                    response?.groupResourcesPageData?.hasMorePages ||
+                    response?.extraResourcesPageData?.hasMorePages
+                );
+
+                console.log(`[countCommunityResources] Page ${page}: ${items.length} items returned for ${keyword}`);
+
+                if (!hasMorePages || items.length === 0) {
+                    console.log(`[countCommunityResources] No more items on page ${page}, stopping`);
+                    break;
+                }
+                page++;
+            }
+            console.log(`[countCommunityResources] ${keyword}: Total ${resourceIds.size} resources across ${totalPagesChecked} pages`);
+        } catch (err) {
+            console.error(`[countCommunityResources] ${keyword} error after ${totalPagesChecked} pages:`, err);
+            throw err;
+        }
+        return resourceIds.size;
+    }
+
     // Fetch all stats in parallel
     async function loadKeywordStats() {
         setStatsLoading(true);
         setStatsError(null);
         try {
-            const [datasetsOld, presentationsOld, coursesOld, productsOld, datasets, presentations, courses, products] = await Promise.all([
-                countByKeyword("ciroh_portal_data"),
+            const datasetKeyword = "ciroh_portal_data,ciroh_hub_data";
+            const communityDatasetKeyword = datasetKeyword.split(",")[0].trim();
+
+            const [datasets, presentationsOld, coursesOld, productsOld, presentations, courses, products, notebooks] = await Promise.all([
+                countCommunityResources(communityDatasetKeyword, "4"),
                 countByKeyword("ciroh_portal_presentation"),
                 countByKeyword("nwm_portal_module"),
                 countByKeyword("nwm_portal_app"),
-                countByKeyword("ciroh_hub_data"),
                 countByKeyword("ciroh_hub_presentation"),
                 countByKeyword("ciroh_hub_module"),
                 countByKeyword("ciroh_hub_app"),
+                countByKeyword("ciroh_hub_notebook"),
             ]);
 
-            setStats({ products: productsOld + products, datasets: datasetsOld + datasets, presentations: presentationsOld + presentations, courses: coursesOld + courses });
+            setStats({
+                products: productsOld + products,
+                datasets: datasets,
+                presentations: presentationsOld + presentations,
+                courses: coursesOld + courses,
+                notebooks: notebooks,
+            });
         } catch (err) {
             setStatsError(err?.message || String(err));
             // reset to safe defaults on error
-            setStats({ products: 0, datasets: 0, presentations: 0, courses: 0 });
+            setStats({ products: 0, datasets: 0, presentations: 0, courses: 0, notebooks: 0 });
         } finally {
             setStatsLoading(false);
         }
@@ -121,12 +181,12 @@ export default function ResearchFeature() {
               </p>
 
               {/* ---------- KEYWORD-BASED STATS ---------- */}
-              <div className="tw-mt-12 tw-grid tw-grid-cols-2 md:tw-grid-cols-3 tw-gap-6 tw-max-w-3xl tw-mx-auto">
+              <div className="tw-mt-12 tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-5 tw-gap-6 tw-max-w-5xl tw-mx-auto">
 
                 {/* PRODUCTS (APPLICATIONS) */}
                 <div className="tw-text-center tw-p-6 tw-bg-white dark:tw-bg-slate-800 tw-rounded-2xl tw-shadow-lg hover:tw-shadow-xl tw-transition-shadow">
                   <div className="tw-text-4xl tw-font-bold tw-text-blue-700 dark:tw-text-cyan-300">
-                    {statsLoading ? "…" : stats.products}
+                    {statsLoading ? <span className="tw-animate-ping">...</span> : stats.products}
                   </div>
                   <div className="tw-mt-2 tw-text-sm tw-font-semibold tw-text-gray-700 dark:tw-text-gray-300">
                     APPLICATIONS
@@ -136,7 +196,7 @@ export default function ResearchFeature() {
                 {/* DATASETS */}
                 <div className="tw-text-center tw-p-6 tw-bg-white dark:tw-bg-slate-800 tw-rounded-2xl tw-shadow-lg hover:tw-shadow-xl tw-transition-shadow">
                   <div className="tw-text-4xl tw-font-bold tw-text-blue-700 dark:tw-text-cyan-300">
-                    {statsLoading ? "…" : stats.datasets}
+                    {statsLoading ? <span className="tw-animate-ping">...</span> : stats.datasets}
                   </div>
                   <div className="tw-mt-2 tw-text-sm tw-font-semibold tw-text-gray-700 dark:tw-text-gray-300">
                     DATASETS
@@ -146,21 +206,27 @@ export default function ResearchFeature() {
                 {/* PRESENTATIONS */}
                 <div className="tw-text-center tw-p-6 tw-bg-white dark:tw-bg-slate-800 tw-rounded-2xl tw-shadow-lg hover:tw-shadow-xl tw-transition-shadow">
                   <div className="tw-text-4xl tw-font-bold tw-text-blue-700 dark:tw-text-cyan-300">
-                    {statsLoading ? "…" : stats.presentations}
+                    {statsLoading ? <span className="tw-animate-ping">...</span> : stats.presentations}
                   </div>
                   <div className="tw-mt-2 tw-text-sm tw-font-semibold tw-text-gray-700 dark:tw-text-gray-300">
                     PRESENTATIONS
                   </div>
                 </div>
 
-                {/* COURSES */}
-                <div className="
-  tw-text-center tw-p-6 tw-bg-white dark:tw-bg-slate-800 
-  tw-rounded-2xl tw-shadow-lg hover:tw-shadow-xl tw-transition-shadow
-  tw-col-span-2 md:tw-col-span-1 md:tw-col-start-2
-">
+                {/* NOTEBOOKS */}
+                <div className="tw-text-center tw-p-6 tw-bg-white dark:tw-bg-slate-800 tw-rounded-2xl tw-shadow-lg hover:tw-shadow-xl tw-transition-shadow">
                   <div className="tw-text-4xl tw-font-bold tw-text-blue-700 dark:tw-text-cyan-300">
-                    {statsLoading ? "…" : stats.courses}
+                    {statsLoading ? <span className="tw-animate-ping">...</span> : stats.notebooks}
+                  </div>
+                  <div className="tw-mt-2 tw-text-sm tw-font-semibold tw-text-gray-700 dark:tw-text-gray-300">
+                    NOTEBOOKS
+                  </div>
+                </div>
+
+                {/* COURSES */}
+                <div className="tw-text-center tw-p-6 tw-bg-white dark:tw-bg-slate-800 tw-rounded-2xl tw-shadow-lg hover:tw-shadow-xl tw-transition-shadow tw-col-span-2 md:tw-col-span-1">
+                  <div className="tw-text-4xl tw-font-bold tw-text-blue-700 dark:tw-text-cyan-300">
+                    {statsLoading ? <span className="tw-animate-ping">...</span> : stats.courses}
                   </div>
                   <div className="tw-mt-2 tw-text-sm tw-font-semibold tw-text-gray-700 dark:tw-text-gray-300">
                     COURSES
