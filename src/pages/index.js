@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
@@ -19,6 +20,9 @@ export default function Home() {
           <Header
             title="CIROH Hub"
             tagline={siteConfig.tagline}
+            description={
+              "Research data, software, tools, documentation, and other resources of the NOAA-supported Cooperative Institute for Research to Operations in Hydrology."
+            }
             buttons={[
               { label: "Publications", href: "/publications", primary: true },
               { label: "IT Services", href: "/docs/services/access" },

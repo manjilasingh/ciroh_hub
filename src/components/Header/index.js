@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 import { useColorMode } from '@docusaurus/theme-common';
 import Link from '@docusaurus/Link';
 
-export default function Header({ title, tagline, buttons }) {
+export default function Header({ title, tagline, description, buttons }) {
   const { colorMode } = useColorMode();
   const isDarkTheme = colorMode === 'dark';
   return (
@@ -37,6 +37,18 @@ export default function Header({ title, tagline, buttons }) {
               >
                 {tagline}
               </p>
+
+              {description && (
+                <p
+                  className={clsx(
+                    styles.heroDescription,
+                    'tw-text-sm sm:tw-text-base lg:tw-text-xl tw-leading-relaxed tw-max-w-lg',
+                    isDarkTheme ? 'tw-text-white' : 'tw-text-blue-700'
+                  )}
+                >
+                  {description}
+                </p>
+              )}
             </div>
 
         {buttons && buttons.length > 0 && (
