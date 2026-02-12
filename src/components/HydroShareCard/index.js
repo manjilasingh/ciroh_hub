@@ -52,9 +52,14 @@ export default function HydroShareCard() {
           <h4>Optional metadata</h4>
           <p>Enhance your card with metadata.</p>
           <div className={styles.codeRow}>
-            <code className={styles.code}>page_url</code>
-            <code className={styles.code}>docs_url</code>
-            <code className={styles.code}>thumbnail_url</code>
+            <div><code className={styles.code}>page_url</code></div>
+            <p>A URL for your resource's website.</p>
+            <div><code className={styles.code}>docs_url</code></div>
+            <p>A URL for your resource's documentation.</p>
+            <div><code className={styles.code}>thumbnail_url</code></div>
+            <p>A URL for a thumbnail image.</p>
+            <div><code className={styles.code}>pres_path</code></div>
+            <p>File path to a PDF within your resource.</p>
           </div>
         </div>
       </div>

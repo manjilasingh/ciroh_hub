@@ -114,7 +114,7 @@ export default function ResearchFeature() {
               </h2>
 
               <p className="tw-text-xl tw-max-w-2xl tw-text-slate-700 dark:tw-text-gray-300 tw-mx-auto">
-                Our research advances hydrological science through{" "}
+                The CIROH community's research advances hydrological science through{" "}
                 <span className="tw-text-blue-700 dark:tw-text-cyan-400 tw-font-semibold">innovation</span>,{" "}
                 <span className="tw-text-blue-700 dark:tw-text-cyan-400 tw-font-semibold">collaboration</span>, and{" "}
                 <span className="tw-text-blue-700 dark:tw-text-cyan-400 tw-font-semibold">technology development</span>.
@@ -123,13 +123,13 @@ export default function ResearchFeature() {
               {/* ---------- KEYWORD-BASED STATS ---------- */}
               <div className="tw-mt-12 tw-grid tw-grid-cols-2 md:tw-grid-cols-3 tw-gap-6 tw-max-w-3xl tw-mx-auto">
 
-                {/* PRODUCTS */}
+                {/* PRODUCTS (APPLICATIONS) */}
                 <div className="tw-text-center tw-p-6 tw-bg-white dark:tw-bg-slate-800 tw-rounded-2xl tw-shadow-lg hover:tw-shadow-xl tw-transition-shadow">
                   <div className="tw-text-4xl tw-font-bold tw-text-blue-700 dark:tw-text-cyan-300">
                     {statsLoading ? "…" : stats.products}
                   </div>
                   <div className="tw-mt-2 tw-text-sm tw-font-semibold tw-text-gray-700 dark:tw-text-gray-300">
-                    PRODUCTS
+                    APPLICATIONS
                   </div>
                 </div>
 
