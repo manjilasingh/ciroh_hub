@@ -226,7 +226,7 @@ const config = {
           },
           items: [
             {
-              label: "Research Products",
+              label: "Research Portal",
               position: "left",
               items: [
                 {
@@ -256,10 +256,42 @@ const config = {
               ],
             },
             {
-              type: "doc",
-              docId: "products/intro",
-              label: "Resources",
-              
+              label: "Documentation",
+              position: "left",
+              href: "/docs/intro",
+              items: [
+                // The sidebar loader is weirdly brittle. If a page is instantiated in "index.js", that must be specified explicitly.
+                {
+                  type: "doc",
+                  docId: "products/ngiab/index",
+                  label: "NGIAB",
+                },
+                {
+                  type: "doc",
+                  docId: "products/research-datastream/index",
+                  label: "NRDS",
+                },
+                {
+                  type: "doc",
+                  docId: "products/evaluation/rtiteehr/index",
+                  label: "TEEHR",
+                },
+                {
+                  type: "doc",
+                  docId: "products/community-fim/fimserv/index",
+                  label: "FIM as a Service",
+                },
+                {
+                  type: "doc",
+                  docId: "products/data-management/bigquery-api/index",
+                  label: "NWM BigQuery API",
+                },
+                {
+                  type: "doc",
+                  docId: "products/intro",
+                  label: "Browse all documentation...",
+                },
+              ],
             },
             {
               label: "Operations",
