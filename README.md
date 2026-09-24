@@ -1,3 +1,4 @@
+[![Board Status](https://dev.azure.com/ciroh-it-admin/73875bc7-3791-4fa0-9fc6-35628c26f10a/0b5d5b32-0223-4d32-9217-017f3eef6c0e/_apis/work/boardbadge/ab9fd2c8-0169-4d14-b6b4-f7a283fc773c)](https://dev.azure.com/ciroh-it-admin/73875bc7-3791-4fa0-9fc6-35628c26f10a/_boards/board/t/0b5d5b32-0223-4d32-9217-017f3eef6c0e/Microsoft.RequirementCategory)
 # CIROH Hub
 
 CIROH Hub is constructed using [Docusaurus](https://docusaurus.io/), a modern static website generator.
